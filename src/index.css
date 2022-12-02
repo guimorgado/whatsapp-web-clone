@@ -1,3 +1,45 @@
-h1 {
-	color: red;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.messageDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.message {
+	display: flex;
+	flex-direction: column;
+	border-radius: 20px;
+	padding-left: 15px;
+	margin-left: 30px;
+	background: #202c33;
+	padding-top: 10px;
+	margin-top: 20px;
+	font-size: 15px;
+	color: white;
+	padding-bottom: 10px;
+	padding-right: 15px;
+}
+
+.messageOwnDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: flex-start;
+}
+
+.messageOwn {
+	display: flex;
+	flex-direction: column;
+	border-radius: 20px;
+	padding-left: 15px;
+	margin-right: 30px;
+	background: #d9fdd3;
+	padding-top: 10px;
+	margin-top: 20px;
+	font-size: 15px;
+	padding-bottom: 10px;
+	padding-right: 15px;
 }
