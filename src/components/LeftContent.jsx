@@ -47,18 +47,23 @@ const LeftContent = ({ chats, setCurrentChat }) => {
 
 			{seeUsers ? (
 				<div className=''>
-					<div className='flex items-center p-2 border-b-[1px] border-gray-900'>
-						<h1 className='text-gray-300'>All users</h1>
+					<div className='relative py-2 flex items-center px-2 border-b-[1px] border-gray-900'>
+						<input
+							type='text'
+							placeholder='Busca o empieza una nueva conversación.'
+							className='relative py-2 w-[100%] pr-5 pl-9 text-sm rounded-xl bg-[#202c33] focus:outline-none text-gray-300 flex'
+						/>
+						<SearchIcon className='absolute top-[18px] left-5 text-gray-300 w-4' />
 					</div>
 
 					{users.map(user => {
 						return (
 							<div
 								key={user.id}
-								className='p-2 bg-gray-[#202c33] flex text-gray-300 items-center gap-2'
+								className='cursor-pointer text-gray-300 border-b-[1px] border-gray-800 py-2 bg-gray-[#202c33] flex px-2 items-center gap-2'
 							>
 								<img
-									className='w-8 rounded-full'
+									className='w-9 rounded-full'
 									src={`https://avatars.dicebear.com/api/initials/${user.username}.svg`}
 								/>
 								<p>{user.username}</p>
@@ -81,7 +86,7 @@ const LeftContent = ({ chats, setCurrentChat }) => {
 							<div
 								onClick={() => setCurrentChat(chat)}
 								key={index}
-								className='py-2 bg-gray-[#202c33] flex px-2 items-center gap-2'
+								className='cursor-pointer border-b-[1px] border-gray-800 py-2 bg-gray-[#202c33] flex px-2 items-center gap-2'
 							>
 								<div>
 									<Conversation data={chat} currentUserId={auth._id} />

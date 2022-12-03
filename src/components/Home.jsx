@@ -12,26 +12,30 @@ const Home = () => {
 	const [currentChat, setCurrentChat] = useState(null);
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const [sendMessage, setSendMessage] = useState(null);
-	const [receiveMessage, setReceiveMessage] = useState(null);
+	const [receivedMessage, setReceivedMessage] = useState(null);
 	const socket = useRef();
 
+	// Connect to Socket.io
 	useEffect(() => {
-		if (sendMessage !== null) {
-			socket.current.emit('send-message', sendMessage);
-		}
-	}, [sendMessage]);
-
-	useEffect(() => {
-		socket.current = io('http://localhost:8800');
+		socket.current = io('ws://localhost:8800');
 		socket.current.emit('new-user-add', auth._id);
 		socket.current.on('get-users', users => {
 			setOnlineUsers(users);
 		});
 	}, [auth]);
 
+	// Send Message to socket server
 	useEffect(() => {
-		socket.current.on('receive-message', data => {
-			setReceiveMessage(data);
+		if (sendMessage !== null) {
+			socket.current.emit('send-message', sendMessage);
+		}
+	}, [sendMessage]);
+
+	// Get the message from socket server
+	useEffect(() => {
+		socket.current.on('recieve-message', data => {
+			console.log(data);
+			setReceivedMessage(data);
 		});
 	}, []);
 
@@ -63,15 +67,15 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className='max-w-[1280px] h-[85%] mx-auto'>
-				<div className='w-full h-full flex bg-gray-200'>
+			<div className='max-w-[1280px] bg-[#111b21] h-[85%] mx-auto'>
+				<div className='w-full h-full flex bg-[#222e35]'>
 					<LeftContent chats={chats} setCurrentChat={setCurrentChat} />
 					<RightContent
 						chat={currentChat}
 						online={checkOnlineStatus(currentChat)}
 						currentUser={auth._id}
 						setSendMessage={setSendMessage}
-						receiveMessage={receiveMessage}
+						receivedMessage={receivedMessage}
 					/>
 				</div>
 			</div>

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	background-color: #111b21;
+}
+
 .messageDiv {
 	display: flex;
 	flex-direction: column;
@@ -42,4 +46,10 @@
 	font-size: 15px;
 	padding-bottom: 10px;
 	padding-right: 15px;
+}
+
+.backgroundImageChat {
+	background-image: url('../src/assets/bg-chat.png');
+	background-size: contain;
+	z-index: 1;
 }
