@@ -34,7 +34,9 @@ const Login = () => {
 			setAuth(data);
 			navigate('/home');
 			localStorage.setItem('token', data.token);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (

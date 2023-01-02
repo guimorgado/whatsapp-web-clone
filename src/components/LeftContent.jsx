@@ -19,7 +19,25 @@ const LeftContent = ({ chats, setCurrentChat }) => {
 			setUsers(respuesta.data);
 		};
 		getUsers();
+
+		console.log(chats);
 	}, []);
+
+	const handleCreateConversation = async idUser => {
+		const chatMembers = { senderId: auth._id, receiverId: idUser };
+
+		if (chatMembers.senderId === chatMembers.receiverId) {
+			console.log('No puedes crear un chat contigo mismo');
+			return;
+		}
+
+		console.log(chatMembers.senderId);
+		const { data } = await axios.post('http://localhost:4000/api/chat/', {
+			senderId: chatMembers.senderId,
+			receiverId: chatMembers.receiverId
+		});
+		console.log(data);
+	};
 
 	return (
 		<div className='h-full w-[450px] bg-[#111b21] border-gray-900 border-r-[1px] flex flex-col'>
@@ -58,16 +76,17 @@ const LeftContent = ({ chats, setCurrentChat }) => {
 
 					{users.map(user => {
 						return (
-							<div
-								key={user.id}
-								className='cursor-pointer text-gray-300 border-b-[1px] border-gray-800 py-2 bg-gray-[#202c33] flex px-2 items-center gap-2'
+							<button
+								onClick={() => handleCreateConversation(user._id)}
+								key={user._id}
+								className='w-full cursor-pointer text-gray-300 border-b-[1px] border-gray-800 py-2 bg-gray-[#202c33] flex px-2 items-center gap-2'
 							>
 								<img
 									className='w-9 rounded-full'
 									src={`https://avatars.dicebear.com/api/initials/${user.username}.svg`}
 								/>
 								<p>{user.username}</p>
-							</div>
+							</button>
 						);
 					})}
 				</div>

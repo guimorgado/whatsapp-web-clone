@@ -4,6 +4,7 @@ import { getUser } from '../../api/UserRequests';
 
 const Conversation = ({ data, currentUserId }) => {
 	const [userData, setUserData] = useState(null);
+
 	console.log('data', data);
 	useEffect(() => {
 		const userId = data.members.find(id => id !== currentUserId);
@@ -16,6 +17,7 @@ const Conversation = ({ data, currentUserId }) => {
 				console.log(error);
 			}
 		};
+
 		getUserData();
 	}, []);
 
